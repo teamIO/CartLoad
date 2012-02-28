@@ -24,7 +24,7 @@ public class CartLoad extends JavaPlugin {
 	public void onEnable() {
 		ConfigLoad();
 
-		this.log.info("Minecart Permanence v" + getDescription().getVersion()
+		this.log.info("CartLoad v" + getDescription().getVersion()
 				+ " has been loaded.");
 
 		PluginManager pm = getServer().getPluginManager();
@@ -98,6 +98,7 @@ public class CartLoad extends JavaPlugin {
 		ConfigPropertyStore("minecarts_run_over_mobs", "false", update);
 		ConfigPropertyStore("minecarts_ignore_players", "false", update);
 		ConfigPropertyStore("minecarts_run_over_players", "false", update);
+		ConfigPropertyStore("minecarts_dont_slow_down","false",update);
 		try {
 			FileOutputStream out = new FileOutputStream(configFile);
 			config.store(out, null);
@@ -118,6 +119,6 @@ public class CartLoad extends JavaPlugin {
 	}
 
 	public void onDisable() {
-		this.log.info("Minecart Permanence has been disabled - minecarts will now unload normally.");
+		this.log.info("CartLoad has been disabled - minecarts will now unload normally.");
 	}
 }

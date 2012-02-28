@@ -12,12 +12,22 @@ import org.bukkit.entity.Vehicle;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
+import org.bukkit.event.vehicle.VehicleCreateEvent;
 import org.bukkit.event.vehicle.VehicleEntityCollisionEvent;
 import org.bukkit.event.vehicle.VehicleMoveEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
 import org.bukkit.util.Vector;
 
 public class CLlistener implements Listener {
+	
+	@EventHandler
+	public void onVehicleCreate(VehicleCreateEvent e){
+		Vehicle v = e.getVehicle();
+		if (v instanceof Minecart){
+			if (CartLoad.config.getProperty("minecarts_dont_slow_down","false").equalsIgnoreCase("true"))
+				((Minecart)v).setSlowWhenEmpty(false);
+		}
+	}
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onVehicleMove(VehicleMoveEvent event) {
