@@ -32,8 +32,6 @@ public class CartLoad extends JavaPlugin {
 
 		this.log.info("CartLoad v" + getDescription().getVersion()
 				+ " has been loaded.");
-		
-		this.getCommand("countminecarts").setExecutor(this);
 
 		PluginManager pm = getServer().getPluginManager();
 
@@ -73,11 +71,11 @@ public class CartLoad extends JavaPlugin {
 	public boolean onCommand(CommandSender sender, Command command,
 			String label, String[] args) {
 		if (command.getName().equalsIgnoreCase("countminecarts")){
-			ArrayList<Minecart> mc = new ArrayList<Minecart>();
+			int totalcount = 0;
 			for (World w : getServer().getWorlds()){
-				mc.addAll(w.getEntitiesByClass(Minecart.class));
+				totalcount+=w.getEntitiesByClass(Minecart.class).size();
 			}
-			sender.sendMessage(ChatColor.YELLOW+"[CartLoad] There are "+mc.size()+" minecarts on the server.");
+			sender.sendMessage(ChatColor.YELLOW+"[CartLoad] There are "+totalcount+" minecarts on the server.");
 			return true;
 		}
 		return false;
