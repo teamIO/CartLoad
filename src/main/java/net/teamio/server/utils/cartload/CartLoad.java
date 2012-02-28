@@ -5,16 +5,22 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 import java.util.logging.Logger;
+
+import org.bukkit.ChatColor;
 import org.bukkit.World;
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Minecart;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
 public class CartLoad extends JavaPlugin {
+
 	public static Properties config = new Properties();
 	public static File configFile = new File("CartLoad.config");
 	public static Properties oldconfig = new Properties();
@@ -37,7 +43,7 @@ public class CartLoad extends JavaPlugin {
 
 			for (World world : worlds) {
 				List<Entity> entities = world.getEntities();
-				for (Entity entity : entities)
+				for (Entity entity : entities){
 					if ((entity instanceof Minecart)) {
 						int x = entity.getLocation().getBlockX();
 						int z = entity.getLocation().getBlockZ();
@@ -52,8 +58,27 @@ public class CartLoad extends JavaPlugin {
 							}
 						}
 					}
+				}
 			}
 		}
+	}
+	
+	
+	/* (non-Javadoc)
+	 * @see org.bukkit.plugin.java.JavaPlugin#onCommand(org.bukkit.command.CommandSender, org.bukkit.command.Command, java.lang.String, java.lang.String[])
+	 */
+	@Override
+	public boolean onCommand(CommandSender sender, Command command,
+			String label, String[] args) {
+		if (command.getName().equalsIgnoreCase("countminecarts")){
+			ArrayList<Minecart> mc = new ArrayList<Minecart>();
+			for (World w : getServer().getWorlds()){
+				mc.addAll(w.getEntitiesByClass(Minecart.class));
+			}
+			sender.sendMessage(ChatColor.YELLOW+"[CartLoad] There are "+mc.size()+" minecarts on the server.");
+			return true;
+		}
+		return false;
 	}
 
 	private void ConfigLoad() {
