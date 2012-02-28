@@ -32,6 +32,8 @@ public class CartLoad extends JavaPlugin {
 
 		this.log.info("CartLoad v" + getDescription().getVersion()
 				+ " has been loaded.");
+		
+		this.getCommand("countminecarts").setExecutor(this);
 
 		PluginManager pm = getServer().getPluginManager();
 
