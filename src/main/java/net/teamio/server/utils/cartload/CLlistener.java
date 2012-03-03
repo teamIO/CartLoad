@@ -107,9 +107,9 @@ public class CLlistener implements Listener {
 
 	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onChunkUnload(ChunkUnloadEvent event) {
-		if (!CartLoad.config
+		if (CartLoad.config
 				.getProperty("keep_stationary_carts_loaded", "true")
-				.equalsIgnoreCase("false")) {
+				.equalsIgnoreCase("true")) {
 			Chunk chunk = event.getChunk();
 			int x = chunk.getX();
 			int z = chunk.getZ();
@@ -124,9 +124,12 @@ public class CLlistener implements Listener {
 					Chunk testchunk = world.getChunkAt(x + i, z + i);
 					Entity[] entities = testchunk.getEntities();
 
-					for (Entity entity : entities)
-						if ((entity instanceof Minecart))
+					for (Entity entity : entities){
+						if ((entity instanceof Minecart)){
 							event.setCancelled(true);
+							return;
+						}
+					}
 				}
 			}
 		}
