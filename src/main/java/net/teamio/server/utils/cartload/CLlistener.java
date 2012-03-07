@@ -20,7 +20,7 @@ import org.bukkit.util.Vector;
 
 public class CLlistener implements Listener {
 	
-	@EventHandler
+	@EventHandler(priority = EventPriority.HIGHEST)
 	public void onVehicleCreate(VehicleCreateEvent e){
 		Vehicle v = e.getVehicle();
 		if (v instanceof Minecart){
@@ -121,7 +121,7 @@ public class CLlistener implements Listener {
 
 			for (int i = -radius; i <= radius; i++) {
 				for (int j = -radius; j <= radius; j++) {
-					Chunk testchunk = world.getChunkAt(x + i, z + i);
+					Chunk testchunk = world.getChunkAt(x + i, z + j);
 					Entity[] entities = testchunk.getEntities();
 
 					for (Entity entity : entities){
