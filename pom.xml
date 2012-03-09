@@ -32,4 +32,12 @@
 			<scope>compile</scope>
 		</dependency>
 	</dependencies>
+	<scm>
+		<url>https://github.com/teamIO/CartLoad.git</url>
+		<connection>git</connection>
+	</scm>
+	<ciManagement>
+		<system>jenkins</system>
+		<url>http://build.lincomlinux.org/jenkins/job/CartLoad</url>
+	</ciManagement>
 </project>
