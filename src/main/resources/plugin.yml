@@ -2,10 +2,18 @@ name: CartLoad
 main: net.teamio.server.utils.cartload.CartLoad
 version: 1.3
 
+load: STARTUP
+
 commands:
    countminecarts:
       description: Count all Minecart Entities on the Server
       usage: /countminecarts
       permission: cartload.use
       permisison-message: Must have permission (cartload.use) to count all minecarts!
+      default: op
+   removeminecarts:
+      description: Remove all Minecart Entites on the Server
+      usage: /rmminecarts
+      permission: cartload.rm
+      permission-message: Must have permission (cartload.rm) to remove all minecarts!
       default: op
